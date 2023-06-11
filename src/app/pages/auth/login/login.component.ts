@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 import { LoginRequest } from './../../../interfaces/login';
 import { ToastrService } from 'ngx-toastr';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -56,6 +56,7 @@ export class LoginComponent {
         },
         complete: () => {
           this.isLoading = true;
+          this.router.navigateByUrl('/subscribers');
           this.toastr.success(
             'login exitoso',
             'Bienvenido!',
@@ -63,12 +64,10 @@ export class LoginComponent {
               timeOut: 3000,
             }
           );
-          this.router.navigateByUrl('/subscribers');
+
 
         }
       });
-    } else {
-
     }
   }
 

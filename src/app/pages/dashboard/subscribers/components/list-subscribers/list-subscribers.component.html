@@ -1,0 +1,29 @@
+
+<ul
+  id="subscriberList"
+  class="flex flex-col gap-2"
+  *ngIf="subscribers.length"
+>
+  <li
+    class="p-4 bg-white rounded-lg shadow-md cursor-pointer"
+    *ngFor="let subscriber of subscribers; trackBy: trackByMethod"
+    (click)="getDetail(subscriber)"
+  >
+    <div class="flex flex-row justify-between">
+      <div class="flex flex-col text-sm text-gray-600">
+        <p class="mr-2">{{ subscriber.Name }} </p>
+        <div class="flex flex-row gap-2">
+          <p>{{ subscriber.CountryName }}</p><p>{{ subscriber.PhoneCodeAndNumber }}</p>
+
+        </div>
+      </div>
+      <div class="flex flex-col justify-end text-right text-sm text-gray-600">
+        <p>{{ subscriber.Area }}</p><p>{{ subscriber.SubscriptionStateDescription }}</p>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<div *ngIf="!subscribers.length" class="w-full h-full flex justify-center items-center"> Subscriptores no registrados</div>
+
+

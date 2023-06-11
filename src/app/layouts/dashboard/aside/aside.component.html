@@ -6,13 +6,15 @@
               <li
                 class="p-2 cursor-pointer opacity-80 hover:opacity-100 border-b-2 border-gray-300 font-semibold text-white"
                 *ngFor="let item of items">
-                <a href="{{item.url}}">{{item.name}}</a>
+                <a href="{{ item.url }}">{{ item.name }}</a>
               </li>
 
           </ul>
       </div>
-      <div class="w-full flex justify-center">
-          <a href="#">Cerrar sesión</a>
+      <div
+          (click)="logout()"
+          class="w-full flex justify-center p-2 cursor-pointer opacity-80 hover:opacity-100 font-semibold text-white">
+          Cerrar sesión
       </div>
 
   </div>

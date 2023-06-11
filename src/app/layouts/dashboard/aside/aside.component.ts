@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './../../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-aside',
@@ -13,9 +15,21 @@ export class AsideComponent {
 
   ];
 
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {
+
+  }
+
   openMenu() {
     const menu = document.querySelector('#menu');
     menu!.classList.toggle('open');
+  }
+
+  logout() {
+    this.authService.removeToken();
+    this.router.navigateByUrl('/login')
   }
 
 }

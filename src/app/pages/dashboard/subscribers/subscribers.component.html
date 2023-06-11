@@ -2,37 +2,53 @@
 
 <app-dashboard-header></app-dashboard-header>
 
-<main class="flex justify-center relative h-full">
+<main class="">
   <!-- aside -->
   <app-dashboard-aside></app-dashboard-aside>
-
   <div class="w-full flex justify-center p-4">
     <div class="w-full md:w-4/6">
-        <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-bold">Listado de Suscriptores</h1>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center">
-            +
-            Agregar Suscriptores
-        </button>
+
+      <div [ngSwitch]="action">
+        <!-- listar -->
+        <div *ngSwitchCase="'list'">
+          <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold">Listado de Suscriptores</h1>
+            <button
+              (click)="onCreateSubscribers()"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center">
+                +
+                Agregar Suscriptores
+            </button>
+          </div>
+          <app-list-subscribers (detail)="detail($event)"></app-list-subscribers>
         </div>
-        <ul id="subscriberList" class="flex flex-col gap-2">
-        <!-- Los elementos de la lista se agregarán aquí dinámicamente -->
 
-          <li class="p-4 bg-white rounded-lg shadow-md" *ngFor="let subscriber of subscribers; trackBy: trackByMethod">
-            <div class="flex flex-row justify-between">
-              <div class="flex flex-col text-sm text-gray-600">
-                <p class="mr-2">{{ subscriber.name }} </p>
-                <div class="flex flex-row gap-2">
-                  <p>{{ subscriber.country }}</p><p>{{ subscriber.phone }}</p>
+        <!-- create -->
+        <div *ngSwitchCase="'create'">
+          <app-create-susbcribers></app-create-susbcribers>
+        </div>
 
-                </div>
-              </div>
-              <div class="flex flex-col justify-end text-right text-sm text-gray-600">
-                <p>{{ subscriber.area }}</p><p>{{ subscriber.status }}</p>
-              </div>
-            </div>
-          </li>
-        </ul>
+        <!-- detail -->
+        <div *ngSwitchCase="'detail'">
+          <app-subscriber-details [subscriber]="subscriberSelected"></app-subscriber-details>
+        </div>
+
+        <!-- listar -->
+        <div *ngSwitchDefault>
+          <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold">Listado de Suscriptores</h1>
+            <button
+              (click)="onCreateSubscribers()"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center">
+                +
+                Agregar Suscriptores
+            </button>
+          </div>
+          <app-list-subscribers></app-list-subscribers>
+        </div>
+
+      </div>
+
     </div>
   </div>
 
