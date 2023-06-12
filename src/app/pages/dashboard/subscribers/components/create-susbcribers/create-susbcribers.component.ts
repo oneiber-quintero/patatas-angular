@@ -156,5 +156,10 @@ export class CreateSusbcribersComponent implements OnInit {
       },
     });
   }
+
+  back() {
+    this.router.navigateByUrl('/subscribers')
+  }
+
 }
 

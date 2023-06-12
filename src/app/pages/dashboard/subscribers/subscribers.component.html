@@ -20,7 +20,9 @@
                 Agregar Suscriptores
             </button>
           </div>
-          <app-list-subscribers (detail)="detail($event)"></app-list-subscribers>
+          <app-list-subscribers
+            (detail)="detail($event)"
+          ></app-list-subscribers>
         </div>
 
         <!-- create -->
@@ -30,7 +32,18 @@
 
         <!-- detail -->
         <div *ngSwitchCase="'detail'">
-          <app-subscriber-details [subscriber]="subscriberSelected"></app-subscriber-details>
+          <app-subscriber-details
+            [subscriber]="subscriberSelected"
+            (detail)="editSubscriber($event)"
+          ></app-subscriber-details>
+        </div>
+
+        <!-- edit -->
+        <div *ngSwitchCase="'edit'">
+          <app-edit-susbcribers
+            [subscriber]="subscriberSelected"
+            (detail)="editSubscriber($event)"
+          ></app-edit-susbcribers>
         </div>
 
         <!-- listar -->

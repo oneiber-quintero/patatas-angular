@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule  }   from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,6 +43,8 @@ import { HttpInterceptorInterceptor } from './interceptors/http-interceptor.inte
     HttpClientModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    InfiniteScrollModule,
+    SweetAlert2Module.forRoot(),
     ToastrModule.forRoot(),
   ],
   exports: [

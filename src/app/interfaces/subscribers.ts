@@ -72,3 +72,21 @@ export interface Country {
   name: string;
 }
 
+
+export interface SetSubscriberRequest {
+  Id: number;
+  Name: string;
+  Email: string;
+  CountryCode: string;
+  PhoneNumber: string;
+  JobTitle: string;
+  Area: string;
+  Topics: any[];
+}
+
+
+export interface FiltersSubscribers {
+  criteria: string;
+  sortOrder: string;
+  sortType: number;
+}

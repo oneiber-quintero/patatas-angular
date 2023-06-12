@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from "./../../../../environments/environment";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { ParamsRequest, SubscriberRequest } from './../../../interfaces/subscribers';
+import { ParamsRequest, SubscriberRequest, SetSubscriberRequest } from './../../../interfaces/subscribers';
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -51,4 +51,9 @@ export class SubscribersService {
     return this.http.delete<any>(apiURL);
   }
 
+  setSubscriber(subscriber: SetSubscriberRequest) {
+    const apiURL = `${this.apiBaseUrl}/subscribers/${subscriber.Id}`;
+    return this.http.put<any>(apiURL, subscriber);
+  }
+  
 }

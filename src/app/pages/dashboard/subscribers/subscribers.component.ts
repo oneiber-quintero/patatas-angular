@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SubscribersService } from './../../../services/dashboard/subscribers/subscribers.service';
 import { SubscriberResponse } from './../../../interfaces/subscribers';
+
 
 @Component({
   selector: 'app-subscribers',
@@ -28,6 +28,11 @@ export class SubscribersComponent implements OnInit{
   }
 
   detail(event: {action: string, subscriber:SubscriberResponse }) {
+    this.action = event.action,
+    this.subscriberSelected = event.subscriber;
+  }
+
+  editSubscriber(event: {action: string, subscriber:SubscriberResponse }) {
     this.action = event.action,
     this.subscriberSelected = event.subscriber;
   }

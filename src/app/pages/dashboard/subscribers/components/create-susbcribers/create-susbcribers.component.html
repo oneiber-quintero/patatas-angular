@@ -1,8 +1,15 @@
 
 <div *ngIf="countries.length">
-  <div class="flex justify-between">
+  <div class="flex flex-col sm:flex-row justify-between">
     <div class="text-2xl font-bold">Agregar Suscriptores</div>
-    <div>
+    <div class="flex gap-2">
+      <button
+        type="button"
+        (click)="back()"
+        class="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+      >
+        volver
+      </button>
       <button
         (click)="addSubscriber()"
         class="bg-blue-500 text-white px-4 py-2 rounded mt-4"
@@ -13,7 +20,7 @@
       <button
         (click)="onSubmit()"
         type="button"
-        class=" text-white px-4 py-2 rounded mt-4 ml-4 "
+        class=" text-white px-4 py-2 rounded mt-4"
         [disabled]="form.invalid"
         [ngClass]="form.invalid ? 'cursor-not-allowed bg-gray-200' : 'bg-green-500'"
       >
@@ -39,72 +46,81 @@
             Eliminar
           </button>
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label for="name-{{i}}" class="block mb-1">Nombre:</label>
-            <input
-              type="text"
-              id="name-{{i}}"
-              formControlName="Name"
-              class="border-2 rounded w-full p-2"
-              [ngClass]="invalidField('Name', subscriber )   ? 'border-red-500' : 'border'"
-            />
-          </div>
-          <div>
-            <label for="email-{{i}}" class="block mb-1">Correo:</label>
-            <input
-              type="email"
-              id="email-{{i}}"
-              formControlName="Email"
-              class="border-2 rounded w-full p-2"
-              [ngClass]="subscriber.get('Email')?.touched && subscriber.errors && subscriber.errors['field'] == 'Email' ? 'border-red-500' : 'border'"
-            />
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col sm:flex-row gap-2">
+            <div class="w-full">
+              <label for="name-{{i}}" class="block mb-1">Nombre:</label>
+              <input
+                type="text"
+                id="name-{{i}}"
+                formControlName="Name"
+                class="border-2 rounded w-full p-2"
+                [ngClass]="invalidField('Name', subscriber )   ? 'border-red-500' : 'border'"
+              />
+            </div>
+            <div class="w-full">
+              <label for="email-{{i}}" class="block mb-1">Correo:</label>
+              <input
+                type="email"
+                id="email-{{i}}"
+                formControlName="Email"
+                class="border-2 rounded w-full p-2"
+                [ngClass]="subscriber.get('Email')?.touched && subscriber.errors && subscriber.errors['field'] == 'Email' ? 'border-red-500' : 'border'"
+              />
 
+            </div>
           </div>
-          <div>
-            <label for="countryCode-{{i}}" class="block mb-1">codigo del pais:</label>
-            <select
-              id="countryCode-{{i}}"
-              formControlName="CountryCode"
-              class="border-2 rounded w-full p-2"
-              [ngClass]="subscriber.get('CountryCode')?.touched && subscriber.errors && subscriber.errors['field'] == 'CountryCode' ? 'border-red-500' : 'border'"
-            >
-              <option value="">Seleccione a pais</option>
-              <option
-                *ngFor="let country of countries"
-                [value]="country.Code">
-                +{{country.PhoneCode}} {{country.Name}}
-              </option>
-            </select>
+
+          <div class="flex flex-col sm:flex-row gap-2">
+            <div class="w-full">
+              <label for="countryCode-{{i}}" class="block mb-1">codigo del pais:</label>
+              <select
+                id="countryCode-{{i}}"
+                formControlName="CountryCode"
+                class="border-2 rounded w-full p-2"
+                [ngClass]="subscriber.get('CountryCode')?.touched && subscriber.errors && subscriber.errors['field'] == 'CountryCode' ? 'border-red-500' : 'border'"
+              >
+                <option value="">Seleccione a pais</option>
+                <option
+                  *ngFor="let country of countries"
+                  [value]="country.Code">
+                  +{{country.PhoneCode}} {{country.Name}}
+                </option>
+              </select>
+            </div>
+            <div class="w-full">
+              <label for="phoneNumber-{{i}}" class="block mb-1">Telefono:</label>
+              <input
+                type="tel"
+                id="phoneNumber-{{i}}"
+                formControlName="PhoneNumber"
+                class="border-2 rounded w-full p-2"
+                [ngClass]="subscriber.get('PhoneNumber')?.touched && subscriber.errors && subscriber.errors['field'] == 'PhoneNumber' ? 'border-red-500' : 'border'"
+              />
+            </div>
           </div>
-          <div>
-            <label for="phoneNumber-{{i}}" class="block mb-1">Telefono:</label>
-            <input
-              type="tel"
-              id="phoneNumber-{{i}}"
-              formControlName="PhoneNumber"
-              class="border-2 rounded w-full p-2"
-              [ngClass]="subscriber.get('PhoneNumber')?.touched && subscriber.errors && subscriber.errors['field'] == 'PhoneNumber' ? 'border-red-500' : 'border'"
-            />
+
+          <div class="flex flex-col sm:flex-row gap-2">
+            <div class="w-full">
+              <label for="jobTitle-{{i}}" class="block mb-1">Titulo del trabajo:</label>
+              <input
+                type="text"
+                id="jobTitle-{{i}}"
+                formControlName="JobTitle"
+                class="border rounded w-full p-2"
+              />
+            </div>
+            <div class="w-full">
+              <label for="area-{{i}}" class="block mb-1">Area:</label>
+              <input
+                type="text"
+                id="area-{{i}}"
+                formControlName="Area"
+                class="border rounded w-full p-2"
+              />
+            </div>
           </div>
-          <div>
-            <label for="jobTitle-{{i}}" class="block mb-1">Titulo del trabajo:</label>
-            <input
-              type="text"
-              id="jobTitle-{{i}}"
-              formControlName="JobTitle"
-              class="border rounded w-full p-2"
-            />
-          </div>
-          <div>
-            <label for="area-{{i}}" class="block mb-1">Area:</label>
-            <input
-              type="text"
-              id="area-{{i}}"
-              formControlName="Area"
-              class="border rounded w-full p-2"
-            />
-          </div>
+
           <div class="col-span-2">
             <span class="block mb-1">Topicos:</span>
             <div class="flex flex-wrap">
@@ -129,4 +145,5 @@
 </div>
 
 <div *ngIf="!countries.length" class="h-full w-full flex justify-center items-center">cargando</div>
+
 

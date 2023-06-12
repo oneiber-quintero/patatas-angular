@@ -8,7 +8,6 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'subscribers', component: SubscribersComponent, canActivate: [canActivateAuthGuard] },
-  // { path: 'subscribers/create', component: SubscribersComponent, canActivate: [canActivateAuthGuard] },
   {
     path: "**",
     redirectTo: "subscribers",

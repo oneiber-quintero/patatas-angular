@@ -1,29 +1,96 @@
 
-<ul
-  id="subscriberList"
-  class="flex flex-col gap-2"
-  *ngIf="subscribers.length"
->
-  <li
-    class="p-4 bg-white rounded-lg shadow-md cursor-pointer"
-    *ngFor="let subscriber of subscribers; trackBy: trackByMethod"
-    (click)="getDetail(subscriber)"
-  >
-    <div class="flex flex-row justify-between">
-      <div class="flex flex-col text-sm text-gray-600">
-        <p class="mr-2">{{ subscriber.Name }} </p>
-        <div class="flex flex-row gap-2">
-          <p>{{ subscriber.CountryName }}</p><p>{{ subscriber.PhoneCodeAndNumber }}</p>
 
+<div class="h-content lg:overflow-y-auto">
+  <div>
+    <form
+      [formGroup]="filtersForm"
+      class="bg-gray-100 p-2 rounded-md flex flex-col lg:flex-row justify-between items-center gap-2"
+    >
+
+      <div class="w-full">
+        <label for="criteria" class="block text-gray-700 font-medium mb-2">texto</label>
+        <input
+          type="text"
+          id="criteria"
+          formControlName="criteria"
+          class="w-full border border-gray-300 p-2 rounded-lg"
+          placeholder="texto">
+      </div>
+
+      <div class="w-full">
+        <label for="sortOrder" class="block text-gray-700 font-medium mb-2">Ordenar Por:</label>
+        <select
+          id="sortOrder"
+          formControlName="sortOrder"
+          class="w-full border border-gray-300 p-2 rounded-lg">
+          <option value="">Seleccione un campo</option>
+          <option value="PublicId">Identificador</option>
+          <option value="Area">Area</option>
+          <option value="Name">Nombre</option>
+          <option value="Email">Correo</option>
+        </select>
+      </div>
+
+      <div class="w-full flex flex-col">
+        <span class="block text-gray-700 font-medium mr-4">Tipo de ordenamiento</span>
+        <div class="w-full">
+          <input
+            formControlName="sortType"
+            type="radio" id="sortTypeAsc"
+            name="sortType"
+            value="0"
+            checked>
+          <label for="sortTypeAsc" class="ml-2">Ascendente</label>
+        </div>
+        <div class="w-full">
+          <input
+            formControlName="sortType"
+            type="radio"
+            id="sortTypeDesc"
+            name="sortType"
+            value="1">
+          <label for="sortTypeDesc" class="ml-2">Descendente</label>
         </div>
       </div>
-      <div class="flex flex-col justify-end text-right text-sm text-gray-600">
-        <p>{{ subscriber.Area }}</p><p>{{ subscriber.SubscriptionStateDescription }}</p>
+      <div class="w-full">
+        <button
+          (click)="applyFilter()"
+          type="button"
+          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+        >Aplicar filtros</button>
       </div>
+    </form>
+  </div>
+
+  <div
+    class="flex flex-col gap-2 h-form"
+    infiniteScroll
+    [scrollWindow]="false"
+    (scrolled)="onScroll()"
+    *ngIf="subscribers.length"
+  >
+    <div
+      class="p-4 bg-white rounded-lg shadow-md cursor-pointer border"
+      *ngFor="let subscriber of subscribers; trackBy: trackByMethod"
+      (click)="getDetail(subscriber)"
+    >
+      <div class="flex flex-row justify-between">
+        <div class="flex flex-col text-sm text-gray-600">
+          <p class="mr-2">{{ subscriber.Name }} </p>
+          <div class="flex flex-row gap-2">
+            <p>{{ subscriber.CountryName }}</p><p>{{ subscriber.PhoneCodeAndNumber }}</p>
+
+          </div>
+        </div>
+        <div class="flex flex-col justify-end text-right text-sm text-gray-600">
+          <p>{{ subscriber.Area }}</p><p>{{ subscriber.SubscriptionStateDescription }}</p>
+        </div>
+      </div>
+
     </div>
-  </li>
-</ul>
 
-<div *ngIf="!subscribers.length" class="w-full h-full flex justify-center items-center"> Subscriptores no registrados</div>
+  </div>
 
+  <div *ngIf="!subscribers.length" class="w-full h-form flex justify-center items-center"> Subscriptores no registrados</div>
 
+</div>
